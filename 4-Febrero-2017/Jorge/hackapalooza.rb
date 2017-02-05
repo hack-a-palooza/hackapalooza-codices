@@ -11,7 +11,7 @@ C_NONE = 0
 C_POINT = 1 << 0	## int 1 , bin 0000001
 C_AUTOINCREMENT = 1 << 1 ## int 2 , bin 0000010
 C_SPRITE = 1 << 2 ## int 4 , bin 0000100
-C_RECTANGLE = 1 << 3 ## int 8 , bin 00001000
+C_FLIGHT = 1 << 3 ## int 8 , bin 00001000
 C_VELOCITY = 1 << 4 ## int 16 , bin 00010000
 C_INPUT = 1 << 5 ## int 32 , bin 00100000
 C_ACCELERATION = 1 << 6 ## int 64 , bin 01000000
@@ -38,16 +38,9 @@ class Point
 end
 
 #Componente Rectangulo
-class Rectangle
-	def initialize(width,height)
-		@width = width
-		@height = height
-	end
-	attr_accessor :width
-	attr_writer :width
-	attr_accessor :height
-	attr_accessor :height
-end
+
+#class FLIGHT
+#end
 
 #Componente Autoincrementable
 class AutoIncrement
@@ -117,7 +110,7 @@ class World
 		@point = [nil]*C_MAX
 		@autoIncrement = [nil]*C_MAX
 		@sprite = [nil]*C_MAX
-		@rectangle = [nil]*C_MAX
+		@flight = [nil]*C_MAX
 		@velocity = [nil]*C_MAX
 		@collision = [nil]*C_MAX
 		@acceleration = [nil]*C_MAX
@@ -163,10 +156,9 @@ class World
 
 		i = addEntity()
 		#print i
-		@mask[i] = C_POINT|C_SPRITE|C_RECTANGLE|C_INPUT|C_VELOCITY|C_ACCELERATION|C_COLLISION
+		@mask[i] = C_POINT|C_SPRITE|C_INPUT|C_VELOCITY|C_ACCELERATION|C_COLLISION
 		@sprite[i] = Gosu::Image.new(path)
 		@point[i] =  Point.new(x,y)
-		@rectangle[i] = Rectangle.new(width,height)
 		@velocity[i] = Velocity.new(xvel,yvel)
 		#@acceleration[i] = Gravity.new()
 		return i
@@ -306,4 +298,4 @@ class GameWindow < Gosu::Window
 		draw_system(@world)
 	end
 end
-GameWindow
+GameWindow.new.show
