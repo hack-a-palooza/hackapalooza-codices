@@ -306,8 +306,4 @@ class GameWindow < Gosu::Window
 		draw_system(@world)
 	end
 end
-
-def main()
-	show_graph()
-end
-main()
+GameWindow.new.show
